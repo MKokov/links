@@ -3,102 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>moosabek — ссылки и ассистент</title>
+<title>Муса · @moosabek</title>
 <meta name="description" content="Lead QA, 10 лет опыта. Консультации по инструментам, автоматизации и AI. Проекты: Yejapa, Тени.">
-<meta name="theme-color" content="#0d1512">
+<meta name="theme-color" content="#1c1e21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
 <style>
   :root{
-    --bg:#0d1512; --card:#15201b; --card2:#1b2a23; --line:#26382f;
-    --text:#eef3ef; --muted:#93a69b; --accent:#3fae6a; --gold:#e3b64a;
-    --radius:18px;
+    --bg:#1c1e21; --bg2:#16181a; --card:#24272b; --card2:#2a2e33; --line:#363a40;
+    --text:#f2f3f4; --muted:#a6abb1; --accent:#f2f3f4; --on-accent:#16181a; --lime:#c6f432;
+    --radius:12px; --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'IBM Plex Sans',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-  body{min-height:100dvh;display:flex;justify-content:center;padding:28px 16px 40px;
-    background:radial-gradient(900px 500px at 50% -10%,rgba(63,174,106,.18),transparent 60%),var(--bg)}
-  .wrap{width:100%;max-width:480px}
+  html,body{color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  html{background:var(--bg2)}
+  body{min-height:100dvh;display:flex;justify-content:center;padding:36px 18px 40px;
+    background:linear-gradient(180deg,#25282c 0%,var(--bg) 340px,var(--bg2) 100%)}
+  .wrap{width:100%;max-width:460px;display:flex;flex-direction:column;gap:22px}
+  svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-  header{text-align:center;margin-bottom:22px}
-  .avatar{width:92px;height:92px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;
-    background:linear-gradient(135deg,var(--accent),#1f6b41);font-size:34px;font-weight:700;color:#fff;
-    box-shadow:0 0 0 3px var(--bg),0 0 0 5px rgba(227,182,74,.6);overflow:hidden}
-  .avatar img{width:100%;height:100%;object-fit:cover}
-  h1{font-size:21px;font-weight:700;letter-spacing:-.01em}
-  .handle{color:var(--muted);font-size:14px;margin-top:2px}
-  .bio{color:#c9d6ce;font-size:15px;line-height:1.45;margin-top:10px}
+  header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+  .avatar{width:104px;height:104px;border-radius:50%;margin-bottom:6px;overflow:hidden;background:var(--card);
+    border:2px solid var(--line);box-shadow:0 0 0 4px var(--bg)}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  h1{font-family:var(--mono);font-size:24px;font-weight:600;letter-spacing:-.01em}
+  .handle{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .bio{font-size:15px;line-height:1.5;margin-top:6px;max-width:340px}
+  .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:6px}
+  .tag{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:5px 10px}
 
-  .links{display:flex;flex-direction:column;gap:10px;margin-bottom:26px}
-  .link{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:var(--radius);
-    background:var(--card);border:1px solid var(--line);color:var(--text);text-decoration:none;
-    transition:transform .12s ease,background .12s ease}
-  .link:active{transform:scale(.98)}
-  .link:hover{background:var(--card2)}
-  .link .ic{font-size:22px;width:28px;text-align:center;flex-shrink:0}
-  .link .t{flex:1;min-width:0}
-  .link .t b{display:block;font-size:15px;font-weight:600}
-  .link .t span{display:block;font-size:13px;color:var(--muted);margin-top:1px}
-  .link .arr{color:var(--muted);font-size:18px}
-  .link.main{background:linear-gradient(135deg,#1f6b41,#2c8a55);border-color:transparent}
-  .link.main .t span{color:#d5eedd}
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;border:0;border-radius:var(--radius);
+    background:var(--accent);color:var(--on-accent);font-family:var(--sans);font-size:16px;font-weight:600;cursor:pointer;transition:transform .12s}
+  .cta:active{transform:scale(.98)}
+  .cta:hover{background:#ffffff}
 
-  .chat{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+  .links{display:flex;flex-direction:column;gap:10px}
+  .link{display:flex;align-items:center;gap:14px;padding:14px;min-height:44px;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);color:var(--text);text-decoration:none;transition:background .12s,border-color .12s}
+  .link:hover{background:var(--card2);border-color:#454a51}
+  .link:active{transform:scale(.99)}
+  .tile{width:40px;height:40px;border-radius:9px;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--lime)}
+  .link .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .link .t b{font-size:15px;font-weight:600}
+  .link .t span{font-size:13px;color:var(--muted)}
+  .link .arr{color:var(--muted)}
+
+  .chat{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
   .chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
-  .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-  .chat-head b{font-size:15px}
-  .chat-head span{font-size:12px;color:var(--muted);margin-left:auto}
-  .msgs{height:340px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-  .m{max-width:85%;padding:10px 13px;border-radius:16px;font-size:14.5px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
-  .m.bot{background:var(--card2);align-self:flex-start;border-bottom-left-radius:5px}
-  .m.me{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
-  .m.err{background:#3a1f1f;color:#f3c3c3}
-  .m a{color:var(--gold)}
+  .chat-head .tile{width:30px;height:30px;border-radius:50%}
+  .chat-head .tile svg{width:16px;height:16px}
+  .chat-head b{font-family:var(--mono);font-size:15px;font-weight:600}
+  .chat-head .status{margin-left:auto;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--lime)}
+  .msgs{height:340px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+  .m{max-width:86%;padding:11px 13px;font-size:14.5px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+  .m.bot{background:var(--card2);align-self:flex-start;border-radius:14px 14px 14px 4px}
+  .m.me{background:var(--accent);color:var(--on-accent);align-self:flex-end;border-radius:14px 14px 4px 14px}
+  .m.err{background:#3a2424;color:#f5c6c6}
+  .m a{color:var(--lime)}
+  .m .book{display:flex;align-items:center;gap:8px;margin-top:10px;min-height:40px;padding:0 14px;border:0;border-radius:10px;
+    background:var(--accent);color:var(--on-accent);font-weight:600;font-size:13.5px;font-family:inherit;cursor:pointer}
+  .m .book svg{width:16px;height:16px}
   .typing span{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--muted);animation:b 1s infinite}
   .typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
   @keyframes b{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 
-  .chips{display:flex;gap:8px;overflow-x:auto;padding:0 14px 10px;scrollbar-width:none}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:0 16px 12px;scrollbar-width:none}
   .chips::-webkit-scrollbar{display:none}
-  .chip{flex-shrink:0;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;
-    color:#c9d6ce;font-size:13px;cursor:pointer;font-family:inherit}
-  .chip:hover{border-color:var(--accent);color:#fff}
+  .chip{flex-shrink:0;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:transparent;
+    color:var(--text);font-size:13px;cursor:pointer;font-family:inherit}
+  .chip:hover{border-color:var(--lime)}
 
-  form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
-  input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+  #form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+  #input{flex:1;min-width:0;min-height:46px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:0 14px;
     color:var(--text);font-size:16px;font-family:inherit;outline:none}
-  input:focus{border-color:var(--accent)}
-  button.send{width:46px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-size:18px;cursor:pointer}
-  button.send:disabled{opacity:.5}
-  footer{text-align:center;color:#5d7066;font-size:12px;margin-top:18px}
-
-  .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:12px}
-  .tag{font-size:12px;color:#c9d6ce;border:1px solid var(--line);border-radius:999px;padding:4px 10px}
-  .cta{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px;border:0;border-radius:var(--radius);
-    background:var(--gold);color:#1a1405;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:10px}
-  .cta:active{transform:scale(.98)}
-  .m .book{display:block;margin-top:8px;padding:8px 12px;border:0;border-radius:10px;background:var(--gold);color:#1a1405;
-    font-weight:600;font-size:13.5px;font-family:inherit;cursor:pointer}
+  #input:focus{border-color:var(--lime)}
+  .send{width:46px;height:46px;border:0;border-radius:12px;background:var(--accent);color:var(--on-accent);cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+  .send svg{width:18px;height:18px;stroke-width:2}
+  .send:disabled{opacity:.5}
+  footer{text-align:center;font-family:var(--mono);color:#7d828a;font-size:12px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:10}
   .modal.open{display:flex}
-  .sheet{display:block;width:100%;max-width:480px;background:var(--card);border:1px solid var(--line);border-radius:22px 22px 0 0;padding:20px 18px 26px}
-  @media(min-width:520px){.modal{align-items:center}.sheet{border-radius:22px}}
-  .sheet h2{font-size:18px;margin-bottom:4px}
+  .sheet{display:block;width:100%;max-width:460px;background:var(--card);border:1px solid var(--line);border-radius:18px 18px 0 0;padding:22px 18px 26px}
+  @media(min-width:520px){.modal{align-items:center}.sheet{border-radius:18px}}
+  .sheet h2{font-family:var(--mono);font-size:18px;font-weight:600;margin-bottom:6px}
   .sheet p{color:var(--muted);font-size:14px;margin-bottom:14px}
-  .sheet label{display:block;font-size:13px;color:#c9d6ce;margin:10px 0 5px}
-  .sheet input,.sheet textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;
+  .sheet label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+  .sheet input,.sheet textarea{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;
     color:var(--text);font-size:16px;font-family:inherit;outline:none}
   .sheet textarea{min-height:90px;resize:vertical}
-  .sheet input:focus,.sheet textarea:focus{border-color:var(--accent)}
-  .sheet .row{display:flex;gap:8px;margin-top:16px}
-  .sheet .row button{flex:1;padding:13px;border-radius:12px;border:0;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer}
-  .sheet .cancel{background:transparent;border:1px solid var(--line)!important;color:var(--text)}
-  .sheet .submit{background:var(--accent);color:#fff}
+  .sheet input:focus,.sheet textarea:focus{border-color:var(--lime)}
+  .sheet .row{display:flex;gap:8px;margin-top:18px}
+  .sheet .row button{flex:1;min-height:48px;border-radius:10px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer}
+  .sheet .cancel{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .sheet .submit{background:var(--accent);border:0;color:var(--on-accent)}
   .sheet .submit:disabled{opacity:.5}
   .sheet .status{margin-top:12px;font-size:14px;min-height:20px}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-telegram" viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/><path d="m9 13 8-6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
+</svg>
 <div class="wrap">
 
   <header>
@@ -109,18 +129,20 @@
     <div class="tags" id="tags"></div>
   </header>
 
-  <button class="cta" id="cta" type="button">📅 Записаться на консультацию</button>
-  <nav class="links" id="links"></nav>
+  <button class="cta" id="cta" type="button"><svg class="i"><use href="#i-calendar"/></svg>Записаться на консультацию</button>
+  <nav class="links" id="links" aria-label="Ссылки"></nav>
 
   <section class="chat" aria-label="AI-ассистент">
     <div class="chat-head">
-      <div class="dot"></div><b>AI-ассистент</b><span>отвечает 24/7</span>
+      <span class="tile"><svg class="i"><use href="#i-spark"/></svg></span><b>AI-ассистент</b>
+      <span class="status"><span class="dot"></span>онлайн</span>
     </div>
-    <div class="msgs" id="msgs"></div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
     <div class="chips" id="chips"></div>
     <form id="form" autocomplete="off">
+      <label for="input" class="sr">Ваш вопрос</label>
       <input id="input" placeholder="Спросите что-нибудь…" maxlength="500">
-      <button class="send" id="send" aria-label="Отправить">➤</button>
+      <button class="send" id="send" aria-label="Отправить"><svg class="i"><use href="#i-send"/></svg></button>
     </form>
   </section>
 
@@ -149,6 +171,7 @@
 <script>
 /* ============================================================
    НАСТРОЙКИ — меняйте только этот блок
+   Иконки: book, moon, insta, telegram, mail, calendar, spark
    ============================================================ */
 const CONFIG = {
   // Адрес Cloudflare Worker с ассистентом
@@ -158,35 +181,35 @@ const CONFIG = {
   handle: "@moosabek",
   bio:    "Lead QA-инженер, 10 лет опыта. Помогаю бизнесу с инструментами, автоматизацией и AI. Делаю свои проекты.",
   tags:   ["QA и тестирование", "Автоматизация", "AI и промпты", "Подбор инструментов"],
-  avatar: "",          // ссылка на фото, например "avatar.jpg" (положите файл рядом). Пусто — будет буква.
+  avatar: "data:image/jpeg;base64,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",
 
   links: [
-    { icon:"📖", title:"Yejapa — читать с переводом на адыгэбзэ", sub:"yejapa.com", url:"https://yejapa.com", main:true },
-    { icon:"🌙", title:"Тени — игра про тревогу", sub:"Назови страх словами и вырасти свой сад", url:"https://mkokov.github.io/teni/" },
-    { icon:"📸", title:"Instagram", sub:"@moosabek", url:"https://instagram.com/moosabek" },
-    // { icon:"✈️", title:"Telegram", sub:"@your_channel", url:"https://t.me/your_channel" },
-    { icon:"✉️", title:"Написать по Yejapa", sub:"hello@yejapa.com", url:"mailto:hello@yejapa.com" },
+    { icon:"book",  title:"Yejapa", sub:"Читалка с переводом на адыгэбзэ", url:"https://yejapa.com" },
+    { icon:"moon",  title:"Тени", sub:"Игра про тревогу: назови страх и вырасти сад", url:"https://mkokov.github.io/teni/" },
+    { icon:"insta", title:"Instagram", sub:"@moosabek", url:"https://instagram.com/moosabek" },
+    // { icon:"telegram", title:"Telegram", sub:"@your_channel", url:"https://t.me/your_channel" },
+    { icon:"mail",  title:"Написать по Yejapa", sub:"hello@yejapa.com", url:"mailto:hello@yejapa.com" },
   ],
 
-  greeting: "Привет! 👋 Я AI-ассистент Мусы. Расскажу, чем он может помочь с QA, автоматизацией и AI, про его проекты, и помогу записаться на консультацию.",
+  greeting: "Привет! Я AI-ассистент Мусы. Расскажу, чем он может помочь с QA, автоматизацией и AI, про его проекты, и помогу записаться на консультацию.",
   suggestions: ["Чем Муса может помочь?", "Хочу внедрить AI в работу", "Что такое Yejapa?", "Как записаться на консультацию?"],
 };
 /* ============================================================ */
 
 const $ = id => document.getElementById(id);
+const icon = n => `<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 $("name").textContent = CONFIG.name;
 $("handle").textContent = CONFIG.handle;
 $("bio").textContent = CONFIG.bio;
 $("tags").innerHTML = (CONFIG.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
 $("footer").textContent = "© " + new Date().getFullYear() + " " + CONFIG.name;
-if (CONFIG.avatar) $("avatar").innerHTML = `<img src="${CONFIG.avatar}" alt="">`;
-else $("avatar").textContent = CONFIG.name.trim()[0] || "•";
+$("avatar").innerHTML = `<img src="${CONFIG.avatar}" alt="${CONFIG.name}">`;
 
 $("links").innerHTML = CONFIG.links.map(l => `
-  <a class="link${l.main ? " main" : ""}" href="${l.url}" target="_blank" rel="noopener">
-    <span class="ic">${l.icon}</span>
+  <a class="link" href="${l.url}" target="_blank" rel="noopener">
+    <span class="tile">${icon(l.icon)}</span>
     <span class="t"><b>${l.title}</b>${l.sub ? `<span>${l.sub}</span>` : ""}</span>
-    <span class="arr">›</span>
+    <span class="arr">${icon("chev")}</span>
   </a>`).join("");
 
 const msgs = $("msgs"), input = $("input"), send = $("send"), chips = $("chips");
@@ -219,7 +242,6 @@ async function ask(text){
   t.innerHTML = '<span class="typing"><span></span><span></span><span></span></span>';
 
   try {
-    if (!CONFIG.WORKER_URL) throw new Error("demo");
     const r = await fetch(CONFIG.WORKER_URL, {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
@@ -232,7 +254,8 @@ async function ask(text){
     t.innerHTML = linkify(reply);
     if (wantsBooking) {
       const b = document.createElement("button");
-      b.className = "book"; b.type = "button"; b.textContent = "📅 Записаться на консультацию";
+      b.className = "book"; b.type = "button";
+      b.innerHTML = icon("calendar") + "Записаться";
       b.onclick = openLead; t.appendChild(b);
       msgs.scrollTop = msgs.scrollHeight;
     }
@@ -240,11 +263,9 @@ async function ask(text){
   } catch (e) {
     history.pop();
     t.className = "m bot err";
-    t.textContent = e.message === "demo"
-      ? "Ассистент ещё не подключён (демо-режим). Укажите WORKER_URL в настройках — см. README."
-      : (e.message === "rate_limited"
-          ? "Слишком много сообщений подряд. Попробуйте через минуту 🙏"
-          : "Не получилось ответить. Попробуйте ещё раз или напишите в директ " + CONFIG.handle);
+    t.textContent = e.message === "rate_limited"
+      ? "Слишком много сообщений подряд. Попробуйте через минуту."
+      : "Не получилось ответить. Попробуйте ещё раз или напишите в директ " + CONFIG.handle;
   } finally {
     send.disabled = false; input.focus();
   }
@@ -272,11 +293,11 @@ leadForm.onsubmit = async e => {
     });
     if (!r.ok) throw new Error();
     leadForm.reset();
-    lStatus.style.color = "#7fd59f";
-    lStatus.textContent = "Готово! Заявка у Мусы, он скоро с вами свяжется 🙌";
+    lStatus.style.color = "#c6f432";
+    lStatus.textContent = "Готово! Заявка у Мусы, он скоро с вами свяжется.";
     setTimeout(closeLead, 2500);
   } catch {
-    lStatus.style.color = "#f3a3a3";
+    lStatus.style.color = "#f5a3a3";
     lStatus.textContent = "Не удалось отправить. Попробуйте ещё раз или напишите в директ " + CONFIG.handle;
   } finally { lSubmit.disabled = false; }
 };
